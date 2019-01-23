@@ -13,6 +13,7 @@ import java.util.UUID;
 @Entity
 @Table(name="product")
 public class Product {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -24,7 +25,9 @@ public class Product {
     private Float price;
     
     public Product() {
-    	
+    	this.id = UUID.randomUUID();
+    	this.label = "crayon";
+    	this.price = (float) 2.00;
     }
     
     public Product(String label, Float price) {
