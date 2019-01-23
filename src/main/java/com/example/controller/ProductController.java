@@ -3,7 +3,11 @@ package com.example.controller;
 import com.example.model.Product;
 import com.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path="/product")
@@ -16,15 +20,15 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/home")
-    public String test(){
-        return "It works";
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/all")
+    public List<Product> findAll() {
+        return productService
+                .findAll()
+                .stream()
+                .collect(Collectors.toList());
     }
 
-    /*
-    @GetMapping(path="/all")
-	public @ResponseBody Iterable<Product> getAllProducts() {
-		return productService.findAll();
-	} */
+
 
 }
