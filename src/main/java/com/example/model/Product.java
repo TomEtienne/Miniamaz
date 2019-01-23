@@ -27,7 +27,7 @@ public class Product {
     public Product() {
     	this.id = UUID.randomUUID();
     	this.label = "crayon";
-    	this.price = (float) 2.00;
+    	this.price = (float) 2.0;
     }
     
     public Product(String label, Float price) {

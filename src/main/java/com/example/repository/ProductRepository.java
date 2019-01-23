@@ -13,4 +13,6 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     List<Product> findAllByLabel(String label);
+    
+    Product findByLabel(String label);
 }
