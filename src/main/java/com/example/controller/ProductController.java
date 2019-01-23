@@ -21,6 +21,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/all")
     public ResponseEntity<List<Product>> findAll() {
@@ -29,6 +30,8 @@ public class ProductController {
                 .stream()
                 .collect(Collectors.toList()));
     }
+    
+    
 
 
 
