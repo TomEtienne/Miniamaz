@@ -2,12 +2,14 @@ package com.example.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Optional;
 import java.util.UUID;
 
 @Entity
+@Table(name="product")
 public class Product {
     @Id
     private UUID id;

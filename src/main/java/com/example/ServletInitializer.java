@@ -1,5 +1,6 @@
-package com.example.miniamaz;
+package com.example;
 
+import com.example.MiniamazApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 

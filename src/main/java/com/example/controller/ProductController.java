@@ -9,16 +9,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path="/product")
 public class ProductController {
 
-    private ProductService productRepository;
+    private ProductService productService;
 
     @Autowired
-    public ProductController(ProductService productRepository) {
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
+    @GetMapping("/home")
+    public String test(){
+        return "It works";
+    }
+
+    /*
     @GetMapping(path="/all")
 	public @ResponseBody Iterable<Product> getAllProducts() {
-		return productRepository.findAll();
-	}
+		return productService.findAll();
+	} */
 
 }
