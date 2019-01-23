@@ -4,6 +4,7 @@ import com.example.model.Product;
 import com.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,11 +23,11 @@ public class ProductController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/all")
-    public List<Product> findAll() {
-        return productService
+    public ResponseEntity<List<Product>> findAll() {
+        return ResponseEntity.ok().body(productService
                 .findAll()
                 .stream()
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
 
