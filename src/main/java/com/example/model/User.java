@@ -1,16 +1,16 @@
 package com.example.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.Collection;
+import javax.persistence.*;
 
 @Entity
 @Table(name="user")	
-public class User implements Serializable
+public class User implements UserDetails
 {
 	
 	/**
@@ -20,8 +20,8 @@ public class User implements Serializable
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="userId")
-	private Long userId;
+	@Column(name="userid")
+	private Long id;
 	
 	@Column(name="lastname")
 	private String lastname;
@@ -34,24 +34,30 @@ public class User implements Serializable
 
 	@Column(name="password")
 	private String password;
-	
+
+	@Column(name="authorities")
+	@OneToMany(fetch=FetchType.EAGER)
+	private Collection<UserAuthorities> authorities;
+
 	public User() {
-	
+		this.authorities = new ArrayList<>();
 	}
 	
-	public User(String lastname, String firstname, String email, String password) {
+	public User(String lastname, String firstname, String email, String password, Collection<UserAuthorities> authorities) {
+		this.id = (long) 1;
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.email = email;
 		this.password = password;
+		this.authorities = authorities;
 	}
 
 	public Long getUserId() {
-		return userId;
+		return id;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUserId(Long id) {
+		this.id = id;
 	}
 
 	public String getLastname() {
@@ -78,8 +84,42 @@ public class User implements Serializable
 		this.email = email;
 	}
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+		this.authorities = (Collection<UserAuthorities>) authorities;
+	}
+
 	public String getPassword() {
 		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 	public void setPassword(String password) {
@@ -89,7 +129,7 @@ public class User implements Serializable
 	@Override
 	public String toString() {
 		return "User{" +
-				"userId=" + userId +
+				"userId=" + id +
 				", lastname='" + lastname + '\'' +
 				", firstname='" + firstname + '\'' +
 				", email='" + email + '\'' +

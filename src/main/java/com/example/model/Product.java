@@ -8,7 +8,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Optional;
-import java.util.UUID;
 
 @Entity
 @Table(name="product")
