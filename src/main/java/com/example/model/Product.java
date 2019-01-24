@@ -16,7 +16,7 @@ public class Product {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @NotNull
     private String label;
@@ -25,9 +25,7 @@ public class Product {
     private Float price;
     
     public Product() {
-    	this.id = UUID.randomUUID();
-    	this.label = "crayon";
-    	this.price = (float) 2.0;
+
     }
     
     public Product(String label, Float price) {
@@ -35,11 +33,11 @@ public class Product {
     	this.price = price;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public Product setId(UUID id) {
+    public Product setId(Long id) {
         this.id = id;
         return this;
     }

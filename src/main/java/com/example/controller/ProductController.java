@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(path="/product")
 public class ProductController {
@@ -20,18 +21,22 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/all")
     public ResponseEntity<List<Product>> findAll() {	
         return ResponseEntity.ok().body(productService.findAll());
     }
-    
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{label}")
+    @GetMapping("/name/{label}")
     public ResponseEntity<Product> findById(@PathVariable String label) throws EntityNotFoundException{
     	return ResponseEntity.ok().body(productService.findByName(label));
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Product> findById(@PathVariable Long id) throws EntityNotFoundException{
+        return ResponseEntity.ok().body(productService.findById(id));
     }
 
 }

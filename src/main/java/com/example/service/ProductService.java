@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class ProductService {
@@ -24,10 +23,9 @@ public class ProductService {
     }
 
     // Get product by his Id
-    public Product findById(UUID id) throws EntityNotFoundException {
+    public Product findById(Long id) throws EntityNotFoundException {
         return productRepository.findById(id).orElseThrow(()
-        -> new EntityNotFoundException("Product" + id + "not found")
-        );
+                -> new EntityNotFoundException("No Product found with id " + id));
     }
 
     // Create product
@@ -54,7 +52,7 @@ public class ProductService {
         productRepository.deleteById(product.getId());
     }
 
-    //Get All products by name
+    //Get product by name
     public Product findByName(String label) {
         return productRepository.findByLabel(label);
     }

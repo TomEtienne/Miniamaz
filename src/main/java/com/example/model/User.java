@@ -21,7 +21,7 @@ public class User implements Serializable
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="userId")
-	private int userId;
+	private Long userId;
 	
 	@Column(name="lastname")
 	private String lastname;
@@ -29,24 +29,28 @@ public class User implements Serializable
 	@Column(name="firstname")
 	private String firstname;
 	
-	@Column(name="age")
-	private int age;
+	@Column(name="email")
+	private String email;
+
+	@Column(name="password")
+	private String password;
 	
-	protected User() {
+	public User() {
 	
 	}
 	
-	public User(String lastname, String firstname, int age) {
+	public User(String lastname, String firstname, String email, String password) {
 		this.lastname = lastname;
 		this.firstname = firstname;
-		this.age = age;
+		this.email = email;
+		this.password = password;
 	}
 
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -66,17 +70,30 @@ public class User implements Serializable
 		this.firstname = firstname;
 	}
 
-	public int getAge() {
-		return age;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", lastname=" + lastname + ", firstname=" + firstname + ", age=" + age + "]";
+		return "User{" +
+				"userId=" + userId +
+				", lastname='" + lastname + '\'' +
+				", firstname='" + firstname + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password +
+				'}';
 	}
-	
 }
