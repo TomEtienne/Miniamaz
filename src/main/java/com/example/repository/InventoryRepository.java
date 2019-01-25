@@ -1,10 +1,10 @@
 package com.example.repository;
 
-import com.example.model.User;
+import com.example.model.Inventory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-	User findByEmail(String email);
+public interface InventoryRepository extends JpaRepository<Inventory, Long> {
+
 }

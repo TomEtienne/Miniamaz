@@ -1,6 +1,6 @@
 package com.example.config;
 
-import com.example.service.UserService;
+import com.example.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UserService userService;
+    private UserServiceImp userService;
 
     @Override
     @Bean
