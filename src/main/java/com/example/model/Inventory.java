@@ -32,8 +32,8 @@ public class Inventory {
         return this;
     }
 
-    public Optional<String> getLabel() {
-        return Optional.ofNullable(label);
+    public String getLabel() {
+        return label;
     }
 
     public Inventory setLabel(String label) {

@@ -1,6 +1,7 @@
 package com.example.service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
@@ -33,10 +34,14 @@ public class InventoryServiceImp implements InventoryService {
 
 	@Override
 	public Inventory createInventory(Inventory inventory) {
-		if (inventoryRepository.existsById(inventory.getId())) {
-            throw new EntityExistsException("Inventory " + inventory.getId() + " already exists");
-        }
-        return inventoryRepository.saveAndFlush(inventory.setCreationDate(LocalDateTime.now()));
+        if (inventoryRepository.findByLabel(inventory.getLabel()) == null) {
+        	System.out.println("oskour");
+        	inventory.setCreationDate(LocalDateTime.now());
+			return inventoryRepository.saveAndFlush(inventory);
+		} else {
+			System.out.println("oskour2");
+			return null;
+		} 
 	}
 
 	@Override
