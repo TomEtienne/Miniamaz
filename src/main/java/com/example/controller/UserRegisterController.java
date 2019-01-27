@@ -17,6 +17,12 @@ public class UserRegisterController {
     //@PreAuthorize("hasAuthority('admin')")
     public ResponseEntity registerUser(@RequestBody User user) {
         System.out.println("test");
-        return ResponseEntity.ok().body(userService.createUser(user));
+        User u = userService.createUser(user);
+        if (u != null) {
+        	return ResponseEntity.ok().body(u);
+        } else {
+        	return ResponseEntity.badRequest().body("Email adress already used");
+        }
+        
     }
 }

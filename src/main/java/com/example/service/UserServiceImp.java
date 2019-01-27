@@ -42,8 +42,12 @@ public class UserServiceImp implements UserDetailsService, UserService {
     
     // Create user
     public User createUser(User user) throws EntityExistsException {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.saveAndFlush(user);
+		if (userRepository.findByEmail(user.getEmail()) == null) {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+	        return userRepository.saveAndFlush(user);
+		} else {
+			return null;
+		}
     }
  
     // Update User

@@ -2,7 +2,7 @@ package com.example.dto;
 
 public class UserDto {
 	
-	private Long id;
+	private Long userId;
     private String firstname;
     private String lastname;
     private String email;
@@ -11,11 +11,11 @@ public class UserDto {
     }
     
     public Long getId() {
-    	return id;
+    	return userId;
     }
     
     public void setId(Long i) {
-    	this.id  = i;
+    	this.userId  = i;
     }
 
     public String getFirstname() {

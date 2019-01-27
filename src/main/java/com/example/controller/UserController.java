@@ -35,9 +35,11 @@ public class UserController {
         return ResponseEntity.ok().body(res);
     }
     
-    @GetMapping("users/{id}")
-    public User findById(@PathVariable Long id) throws EntityNotFoundException {
-        return userService.findById(id);
+    @GetMapping("users/{userId}")
+    public User findById(@PathVariable Long userId) throws EntityNotFoundException {
+    	User u = userService.findById(userId);
+    	UserDto uDTO = UserDAOHibernate.createDTO(u);
+        return u;
     }
 
     @PostMapping("/users/create")
@@ -48,9 +50,14 @@ public class UserController {
     }
     
     @PutMapping("/users/{userId}")
-    public ResponseEntity updateUser(@PathVariable Long userId) {
+    public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody User body) {
         User userUpdate = userService.findById(userId);
-        return ResponseEntity.ok().body(userService.updateUser(userUpdate));
+        if(userUpdate != null) {
+        	return ResponseEntity.ok().body(userService.updateUser(body));
+        } else {
+        	return ResponseEntity.badRequest().body("User not found");
+        }
+        
     }
     
     @DeleteMapping("/users/{userId}")
