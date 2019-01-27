@@ -30,17 +30,15 @@ public class ProductServiceImp {
 
     // Create product
     public Product createProduct(Product product) throws EntityExistsException {
-        if(productRepository.existsById(product.getId())) {
-            throw new EntityExistsException("Product" + product.getId() + "not created cause already exists");
-        }
-        return productRepository.saveAndFlush(product);
+        if (productRepository.findByLabel(product.getLabel()) == null) {
+			return productRepository.saveAndFlush(product);
+		} else {
+			return null;
+		}
     }
 
     // Update product
     public Product updateProduct(Product product) throws EntityExistsException {
-        if(productRepository.existsById(product.getId())) {
-            throw new EntityExistsException("Product" + product.getId() + "not created cause already exists");
-        }
         return productRepository.saveAndFlush(product);
     }
 
